@@ -42,7 +42,7 @@
             var actualCode = Math.abs(Math.round(Math.sin(h1 * h2 * 24344597111) * 2342356631)) % 786987698345343;
 
             if (expectedCode == actualCode){
-                var result = "outcome: {0}".format(Math.abs(Math.round(Math.sin(seed * 14593867) * 23435353)) % 2);
+                var result = "outcome: {0}".format(Math.abs(Math.round(Math.sin(seed * h1 * h2 * 14593867) * 23435353)) % 2);
                 output(result);
             } else {
                 var result = "expected code: {0}<br> actual code: {1}".format(expectedCode, actualCode)
