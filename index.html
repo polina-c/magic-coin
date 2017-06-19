@@ -9,11 +9,12 @@
     Password 0: <input type="password" id="pass1"><br><br>
     Password 1: <input type="password" id="pass2"><br><br>
     Seed: <input type="date" id="seed"><br><br>
+    Expected Code: <input type="text" id="code" value="1915090999"><br><br>
     <button type="button" onclick="process()">Click Me</button>
     <p id="result"></p>
 
     <script>
-        var expectedToken = 1915090999;
+        
         
         if (!String.prototype.format) {
             String.prototype.format = function() {
@@ -36,14 +37,15 @@
             var h1 = hashCode(document.getElementById('pass1').value);
             var h2 = hashCode(document.getElementById('pass2').value);
             var seed = hashCode(document.getElementById('seed').value);
+            var expectedCode = document.getElementById('code').value;
             
-            var actualToken = Math.abs(Math.round(Math.sin(h1 * h2 * 24344597111) * 2342356631)) % 786987698345343;
+            var actualCode = Math.abs(Math.round(Math.sin(h1 * h2 * 24344597111) * 2342356631)) % 786987698345343;
 
-            if (expectedToken == actualToken){
+            if (expectedCode == actualCode){
                 var result = "outcome: {0}".format(Math.abs(Math.round(Math.sin(seed * 14593867) * 23435353)) % 2);
                 output(result);
             } else {
-                var result = "expected code: {0}<br> actual code: {1}".format(expectedToken, actualToken)
+                var result = "expected code: {0}<br> actual code: {1}".format(expectedCode, actualCode)
                 output(result);          
             }
         }
