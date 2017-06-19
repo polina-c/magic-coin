@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Magic Coin</title>
+</head>
+<body>
+    <h1>Magic Coin</h1>
+
+    Seed: <input type="number" id="seed" value="1"><br><br>
+    <button type="button" onclick="get()">Click Me</button>
+    <p id="result"></p>
+
+    <script>
+        function get() {
+            var seed = document.getElementById('seed').value * 1;
+            var result = Math.abs(Math.round(Math.sin(seed * 14593867) * 23435353)) % 2;
+            document.getElementById('result').innerHTML = result;
+        }
+    </script>
+</body>
+</html>
