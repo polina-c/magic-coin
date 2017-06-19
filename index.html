@@ -8,7 +8,7 @@
 
     Password 0: <input type="password" id="pass1"><br><br>
     Password 1: <input type="password" id="pass2"><br><br>
-    Seed: <input type="number" id="seed" value="1"><br><br>
+    Seed: <input type="date" id="seed"><br><br>
     <button type="button" onclick="process()">Click Me</button>
     <p id="result"></p>
 
@@ -35,7 +35,7 @@
         function process() {
             var h1 = hashCode(document.getElementById('pass1').value);
             var h2 = hashCode(document.getElementById('pass2').value);
-            var seed = document.getElementById('seed').value * 1;
+            var seed = hashCode(document.getElementById('seed').value);
             
             var actualToken = Math.abs(Math.round(Math.sin(h1 * h2 * 24344597111) * 2342356631)) % 786987698345343;
 
