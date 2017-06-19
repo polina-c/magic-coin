@@ -1,20 +1,54 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Magic Coin</title>
 </head>
 <body>
     <h1>Magic Coin</h1>
 
+    Password 0: <input type="password" id="pass1"><br><br>
+    Password 1: <input type="password" id="pass2"><br><br>
     Seed: <input type="number" id="seed" value="1"><br><br>
-    <button type="button" onclick="get()">Click Me</button>
+    <button type="button" onclick="process()">Click Me</button>
     <p id="result"></p>
 
     <script>
-        function get() {
+        var expectedToken = 1915090999;
+        
+        if (!String.prototype.format) {
+            String.prototype.format = function() {
+                var args = arguments;
+                return this.replace(/{(\d+)}/g, function(match, number) { 
+                return typeof args[number] != 'undefined'
+                    ? args[number]
+                    : match
+                ;
+                });
+            };
+        }
+
+        function hashCode(str) {
+            return str.split('').reduce((prevHash, currVal) =>
+                ((prevHash << 5) - prevHash) + currVal.charCodeAt(0), 0) + 1;
+        }
+        
+        function process() {
+            var h1 = hashCode(document.getElementById('pass1').value);
+            var h2 = hashCode(document.getElementById('pass2').value);
             var seed = document.getElementById('seed').value * 1;
-            var result = Math.abs(Math.round(Math.sin(seed * 14593867) * 23435353)) % 2;
+            
+            var actualToken = Math.abs(Math.round(Math.sin(h1 * h2 * 24344597111) * 2342356631)) % 786987698345343;
+
+            if (expectedToken == actualToken){
+                var result = "outcome: {0}".format(Math.abs(Math.round(Math.sin(seed * 14593867) * 23435353)) % 2);
+                output(result);
+            } else {
+                var result = "expected code: {0}<br> actual code: {1}".format(expectedToken, actualToken)
+                output(result);          
+            }
+        }
+
+        function output(result){
             document.getElementById('result').innerHTML = result;
         }
     </script>
